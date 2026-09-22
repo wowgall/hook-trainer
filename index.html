@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#E9EDF2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141A23" media="(prefers-color-scheme: dark)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>훅 트레이너</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎣</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#E9EDF2; --surface:#FFFFFF; --sunk:#F2F5F9; --ink:#172033; --muted:#5B6576; --line:#D5DCE5;
+  --a:#C77700; --b:#2F6F9F; --c:#2E7F6F; --done:#2E7F6F;
+  --r-lg:14px; --r-sm:8px;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#141A23; --surface:#1D2530; --sunk:#18202A; --ink:#E6EBF2; --muted:#98A3B3; --line:#2C3644;
+         --a:#E9A13B; --b:#6BA7D6; --c:#5FB8A4; --done:#5FB8A4; }
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"IBM Plex Sans KR",system-ui,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;word-break:keep-all;overflow-wrap:anywhere}
+img{max-width:100%;display:block}
+button,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--b);outline-offset:2px}
+.wrap{max-width:640px;margin:0 auto;padding:0 16px 48px}
+.num{font-variant-numeric:tabular-nums}
+
+/* top bar */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);
+  display:flex;align-items:center;gap:10px;padding:12px 0 10px}
+.bar h1{font-size:20px;margin:0;font-weight:700;flex:1}
+.back{border:0;background:var(--surface);border-radius:999px;padding:6px 14px;font-weight:600}
+select{font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px 12px}
+.tabs{display:flex;gap:6px;margin:0 0 14px}
+.tabs button{flex:1;border:1px solid var(--line);background:transparent;border-radius:999px;padding:8px 0;font-weight:600;color:var(--muted)}
+.tabs button[aria-selected="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+
+/* progress: ten ranked slots */
+.slots{display:grid;grid-template-columns:repeat(10,1fr);gap:4px;margin:4px 0 6px}
+.slots i{height:6px;border-radius:3px;background:var(--line)}
+.slots i.on{background:var(--done)}
+.sub{color:var(--muted);font-size:14px;margin:0 0 16px}
+
+/* list */
+.item{display:grid;grid-template-columns:22px 112px 1fr;gap:10px;align-items:start;width:100%;text-align:left;
+  background:var(--surface);border:0;border-radius:var(--r-lg);padding:10px;margin-bottom:10px}
+.rank{font-size:20px;font-weight:700;color:var(--muted);line-height:1.2;padding-top:2px}
+.item.done .rank{color:var(--done)}
+.item img{border-radius:var(--r-sm);aspect-ratio:16/9;object-fit:cover;width:112px;background:var(--sunk)}
+.item h3{font-size:15px;margin:0 0 4px;font-weight:600;line-height:1.4;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.meta{font-size:13px;color:var(--muted);line-height:1.5}
+.chips{display:flex;gap:4px;flex-wrap:wrap;margin-top:4px}
+.chip{font-size:12px;border:1px solid var(--line);border-radius:999px;padding:0 8px}
+
+/* detail */
+.hero img{width:100%;border-radius:var(--r-lg);aspect-ratio:16/9;object-fit:cover}
+.hero h2{font-size:19px;line-height:1.45;margin:12px 0 4px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:18px 0 14px}
+.steps button{border:1px solid var(--line);background:var(--surface);border-radius:var(--r-sm);padding:8px 4px;
+  font-size:14px;font-weight:600;color:var(--muted);text-align:center}
+.steps button b{display:block;font-size:12px;font-weight:600}
+.steps button[aria-selected="true"]{border-color:var(--ink);color:var(--ink);box-shadow:inset 0 -3px 0 var(--ink)}
+.panel{background:var(--surface);border-radius:var(--r-lg);padding:16px}
+.panel h4{margin:0 0 6px;font-size:16px}
+.q{font-weight:600;margin:0 0 8px}
+textarea{width:100%;min-height:84px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--sunk);padding:10px;resize:vertical;line-height:1.5}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.btn{border:0;border-radius:999px;padding:10px 18px;font-weight:700;background:var(--ink);color:var(--bg)}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+a.btn{text-decoration:none;display:inline-block}
+.answer{margin-top:14px;background:var(--sunk);border-radius:var(--r-sm);padding:12px 14px;border-left:4px solid var(--b)}
+.answer dl{margin:0}
+.answer dt{font-size:13px;color:var(--muted);margin-top:10px}
+.answer dt:first-child{margin-top:0}
+.answer dd{margin:2px 0 0}
+.quote{font-size:18px;font-weight:600;line-height:1.5}
+.hint{font-size:13px;color:var(--muted)}
+
+/* the 30-second strip */
+.player{position:relative;width:100%;aspect-ratio:16/9;border-radius:var(--r-sm);overflow:hidden;background:#000;margin-bottom:12px}
+.player iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.strip{display:flex;height:44px;border-radius:var(--r-sm);overflow:hidden;margin:4px 0 2px}
+.strip button{border:0;color:#fff;font-weight:700;font-size:13px;padding:0 8px;text-align:left;opacity:.5;white-space:nowrap}
+.strip button[aria-pressed="true"]{opacity:1}
+.strip .s0{flex:3;min-width:52px;background:var(--a)} .strip .s1{flex:7;background:var(--b)} .strip .s2{flex:20;background:var(--c)}
+.seg{margin-top:12px;min-height:96px}
+.seg .why{color:var(--muted);margin-top:4px}
+ul.dev{margin:6px 0 0;padding-left:18px}
+
+.note{background:var(--surface);border-radius:var(--r-lg);padding:14px;margin-bottom:10px}
+.note h3{font-size:15px;margin:0 0 6px}
+.note p{margin:4px 0;white-space:pre-wrap}
+.note .k{font-size:13px;color:var(--muted);display:block}
+.empty{background:var(--surface);border-radius:var(--r-lg);padding:20px}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);
+  background:var(--ink);color:var(--bg);padding:8px 16px;border-radius:999px;font-size:14px;opacity:0;transition:opacity .2s}
+.toast.show{opacity:1}
+@media (prefers-reduced-motion: reduce){.toast{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap" id="app" aria-live="polite"></div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(() => {
+  const $app = document.getElementById('app');
+  const state = { dates: [], date: null, day: null, view: 'list', vid: null, step: 1, seg: 0 };
+
+  // ---------- storage (per-browser) ----------
+  const store = {
+    get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch { return d; } },
+    set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} }
+  };
+  const notes = () => store.get('ht:notes', {});
+  const saveNote = (vid, patch) => { const n = notes(); n[vid] = { ...(n[vid] || {}), ...patch, updated: new Date().toISOString() }; store.set('ht:notes', n); };
+  const isDone = vid => !!(notes()[vid] || {}).done;
+
+  // ---------- helpers ----------
+  const el = (tag, attrs = {}, ...kids) => {
+    const n = document.createElement(tag);
+    for (const [k, v] of Object.entries(attrs)) {
+      if (v == null || v === false) continue;
+      if (k === 'on') for (const [e, f] of Object.entries(v)) n.addEventListener(e, f);
+      else if (k === 'class') n.className = v;
+      else n.setAttribute(k, v === true ? '' : v);
+    }
+    for (const kid of kids.flat()) if (kid != null && kid !== false) n.append(kid.nodeType ? kid : String(kid));
+    return n;
+  };
+  const man = n => n == null ? '-' : n >= 10000 ? (n / 10000).toFixed(n >= 100000 ? 0 : 1) + '만' : n.toLocaleString('ko-KR');
+  const dur = s => { s = +s || 0; const h = Math.floor(s / 3600), m = Math.floor(s % 3600 / 60); return h ? `${h}시간 ${m}분` : `${m}분`; };
+  const toast = msg => { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(toast._t); toast._t = setTimeout(() => t.classList.remove('show'), 1600); };
+  const v = () => state.day.videos.find(x => x.video_id === state.vid);
+
+  async function loadJSON(path) {
+    const r = await fetch(path + '?t=' + Date.now(), { cache: 'no-store' });
+    if (!r.ok) throw new Error(path + ' ' + r.status);
+    return r.json();
+  }
+  async function init() {
+    try {
+      const idx = await loadJSON('data/index.json');
+      state.dates = idx.dates || [];
+      await openDate(idx.latest || state.dates[0]);
+    } catch (e) {
+      $app.replaceChildren(el('div', { class: 'bar' }, el('h1', {}, '훅 트레이너')),
+        el('div', { class: 'empty' }, el('p', {}, '아직 오늘의 목록이 없습니다.'),
+          el('p', { class: 'hint' }, 'PC에서 08_HOOK_TRAINER_RUN.cmd를 한 번 실행하면 data 폴더에 목록이 생깁니다.')));
+    }
+  }
+  async function openDate(d) {
+    state.date = d; state.day = await loadJSON(`data/${d}.json`); state.view = 'list'; render();
+  }
+
+  // ---------- views ----------
+  function render() {
+    if (state.view === 'detail') return renderDetail();
+    if (state.view === 'notes') return renderNotes();
+    renderList();
+  }
+
+  function header(title, withTabs = true) {
+    const nodes = [];
+    const bar = el('div', { class: 'bar' }, el('h1', {}, title));
+    if (state.dates.length) {
+      const sel = el('select', { 'aria-label': '날짜 선택', on: { change: e => openDate(e.target.value) } },
+        state.dates.map(d => el('option', { value: d, selected: d === state.date }, (+d.slice(5,7)) + '월 ' + (+d.slice(8,10)) + '일')));
+      bar.append(sel);
+    }
+    nodes.push(bar);
+    if (withTabs) nodes.push(el('div', { class: 'tabs', role: 'tablist' },
+      el('button', { role: 'tab', 'aria-selected': String(state.view === 'list'), on: { click: () => { state.view = 'list'; render(); } } }, '오늘의 10개'),
+      el('button', { role: 'tab', 'aria-selected': String(state.view === 'notes'), on: { click: () => { state.view = 'notes'; render(); } } }, '내 연습 노트')));
+    return nodes;
+  }
+
+  function renderList() {
+    const vids = state.day.videos || [];
+    const doneCount = vids.filter(x => isDone(x.video_id)).length;
+    const slots = el('div', { class: 'slots', 'aria-label': `${doneCount}/${vids.length} 완료` },
+      vids.map(x => el('i', { class: isDone(x.video_id) ? 'on' : '' })));
+    const list = vids.map(x => el('button', { class: 'item' + (isDone(x.video_id) ? ' done' : ''),
+        on: { click: () => { state.vid = x.video_id; state.step = 1; state.seg = 0; state.view = 'detail'; render(); scrollTo(0, 0); } } },
+      el('span', { class: 'rank num' }, x.rank),
+      el('img', { src: x.thumb, alt: '', loading: 'lazy' }),
+      el('span', {},
+        el('h3', {}, x.title),
+        el('span', { class: 'meta' }, `${x.channel_title} 구독자 ${man(x.subscriber_count)}`), el('br'),
+        el('span', { class: 'meta num' }, `조회 ${man(x.view_count)} ${dur(x.duration_seconds)}`),
+        el('span', { class: 'chips' }, el('span', { class: 'chip' }, '기여 ' + x.contribution_grade), el('span', { class: 'chip' }, '성과 ' + x.performance_grade),
+          x.analysis ? null : el('span', { class: 'chip' }, '분석 대기')))));
+    $app.replaceChildren(...header('훅 트레이너'),
+      slots, el('p', { class: 'sub num' }, `${doneCount}/${vids.length} 완료 · 롱폼, 기여·성과 Good 이상, 구독자 40만 미만, 음악 제외`),
+      ...(list.length ? list : [el('div', { class: 'empty' }, '조건에 맞는 영상이 없는 날입니다. 다른 날짜를 골라 보세요.')]));
+  }
+
+  function renderDetail() {
+    const x = v(); const a = x.analysis || {}; const n = notes()[x.video_id] || {};
+    const back = el('div', { class: 'bar' }, el('button', { class: 'back', on: { click: () => { state.view = 'list'; render(); } } }, '목록'),
+      el('h1', { class: 'num' }, `${x.rank}번째 영상`));
+    const hero = el('div', { class: 'hero' }, el('img', { src: x.thumb.replace('hqdefault', 'maxresdefault'), alt: '썸네일', on: { error: e => { e.target.src = x.thumb; } } }),
+      el('h2', {}, x.title),
+      el('div', { class: 'meta num' }, `${x.channel_title} 구독자 ${man(x.subscriber_count)} 조회 ${man(x.view_count)} ${dur(x.duration_seconds)}`));
+    const stepNames = [['썸네일', '1단계'], ['첫 30초', '2단계'], ['내 버전', '3단계']];
+    const steps = el('div', { class: 'steps', role: 'tablist' }, stepNames.map(([t, s], i) =>
+      el('button', { role: 'tab', 'aria-selected': String(state.step === i + 1), on: { click: () => { state.step = i + 1; render(); } } }, el('b', {}, s), t)));
+    const body = [stepThumb, stepHook, stepMine][state.step - 1](x, a, n);
+    $app.replaceChildren(back, hero, steps, body);
+  }
+
+  function stepThumb(x, a, n) {
+    const t = a.thumbnail || {};
+    const ta = el('textarea', { placeholder: '시선이 먼저 간 곳, 누르고 싶었던 이유', on: { input: e => saveNote(x.video_id, { obs_thumb: e.target.value, date: state.date, title: x.title }) } });
+    ta.value = n.obs_thumb || '';
+    const key = 'open_thumb' + x.video_id;
+    const answer = () => el('div', { class: 'answer' }, el('dl', {},
+      el('dt', {}, '썸네일 문구'), el('dd', { class: 'quote' }, t.text_on_thumbnail || '-'),
+      el('dt', {}, '첫 시선'), el('dd', {}, t.first_glance || '-'),
+      el('dt', {}, '건드리는 감정'), el('dd', {}, t.emotion_trigger || '-'),
+      el('dt', {}, '구도와 색'), el('dd', {}, t.composition || '-'),
+      el('dt', {}, '제목과 역할 분담'), el('dd', {}, t.title_combo || '-')));
+    return el('div', { class: 'panel' },
+      el('p', { class: 'q' }, '썸네일과 제목만 보고, 이 영상을 누르게 만드는 장치를 한두 줄로 적어 보세요.'), ta,
+      el('div', { class: 'row' }, el('button', { class: 'btn', on: { click: () => { state[key] = !state[key]; render(); } } }, state[key] ? '분석 닫기' : '분석과 비교하기')),
+      state[key] ? (x.analysis ? answer() : el('p', { class: 'hint' }, '분석이 아직 없습니다.')) : null);
+  }
+
+  function stepHook(x, a, n) {
+    const h = a.hook || {}; const tl = h.timeline || [];
+    const player = el('div', { class: 'player' }, el('iframe', {
+      src: `https://www.youtube-nocookie.com/embed/${x.video_id}?start=0&end=30&playsinline=1&rel=0&modestbranding=1`,
+      title: '처음 30초', allow: 'encrypted-media; picture-in-picture', allowfullscreen: true, loading: 'lazy' }));
+    const ta = el('textarea', { placeholder: '첫 문장, 계속 보게 만든 약속, 화면 장치', on: { input: e => saveNote(x.video_id, { obs_hook: e.target.value, date: state.date, title: x.title }) } });
+    ta.value = n.obs_hook || '';
+    const key = 'open_hook' + x.video_id;
+    const segBtns = el('div', { class: 'strip', role: 'group', 'aria-label': '30초 구간' },
+      ['0–3초', '3–10초', '10–30초'].map((lab, i) => el('button', { class: 's' + i, 'aria-pressed': String(state.seg === i), on: { click: () => { state.seg = i; render(); } } }, lab)));
+    const cur = tl[state.seg] || {};
+    const answer = () => el('div', { class: 'answer' },
+      el('dl', {}, el('dt', {}, '첫 문장'), el('dd', { class: 'quote' }, h.first_line || '-'),
+        el('dt', {}, '훅 유형'), el('dd', {}, h.hook_type || '-')),
+      el('p', { class: 'hint', style: 'margin:12px 0 0' }, '구간을 눌러 보세요. 막대 길이는 실제 시간 비율입니다.'), segBtns,
+      el('div', { class: 'seg' }, el('div', {}, cur.what || '-'), el('div', { class: 'why' }, cur.why || '')),
+      el('dl', {}, el('dt', {}, '끝까지 보게 만든 약속'), el('dd', {}, h.promise || '-'),
+        el('dt', {}, '쓰인 장치'), el('dd', {}, el('ul', { class: 'dev' }, (h.devices || []).map(d => el('li', {}, d)))),
+        a.transcript_30s ? el('dt', {}, '처음 30초 대사') : null, a.transcript_30s ? el('dd', {}, a.transcript_30s) : null,
+        el('dt', {}, '가져갈 공식'), el('dd', { class: 'quote' }, a.lesson || '-')),
+      el('p', { class: 'hint' }, a.basis === 'video' ? '영상 30초를 직접 보고 분석했습니다.' : a.basis === 'transcript' ? '영상 대신 자막으로 분석했습니다. 화면 설명은 추정입니다.' : '제목과 썸네일만으로 추정한 분석입니다.'));
+    return el('div', { class: 'panel' }, player,
+      el('div', { class: 'row', style: 'margin-top:0' }, el('a', { class: 'btn ghost', href: `https://youtu.be/${x.video_id}?t=0`, target: '_blank', rel: 'noopener' }, 'YouTube 앱에서 보기')),
+      el('p', { class: 'q', style: 'margin-top:14px' }, '처음 30초만 보고, 이탈을 막은 장치를 적어 보세요.'), ta,
+      el('div', { class: 'row' }, el('button', { class: 'btn', on: { click: () => { state[key] = !state[key]; render(); } } }, state[key] ? '분석 닫기' : '분석과 비교하기')),
+      state[key] ? (x.analysis ? answer() : el('p', { class: 'hint' }, '분석이 아직 없습니다.')) : null);
+  }
+
+  function stepMine(x, a, n) {
+    const p = a.practice || {};
+    const hook = el('textarea', { placeholder: '내 채널 주제로 쓴 첫 문장', on: { input: e => saveNote(x.video_id, { my_hook: e.target.value, date: state.date, title: x.title }) } });
+    hook.value = n.my_hook || '';
+    const thumb = el('textarea', { placeholder: '내 썸네일 문구 (12자 안팎)', style: 'min-height:56px', on: { input: e => saveNote(x.video_id, { my_thumb: e.target.value, date: state.date, title: x.title }) } });
+    thumb.value = n.my_thumb || '';
+    const key = 'open_ex' + x.video_id;
+    return el('div', { class: 'panel' },
+      el('h4', {}, '오늘의 과제'), el('p', {}, p.task || '이 영상의 구조를 그대로 빌려, 내 채널 주제로 첫 문장과 썸네일 문구를 써 보세요.'),
+      el('p', { class: 'q' }, '첫 문장'), hook,
+      el('p', { class: 'q', style: 'margin-top:10px' }, '썸네일 문구'), thumb,
+      el('div', { class: 'row' },
+        el('button', { class: 'btn', on: { click: () => { saveNote(x.video_id, { done: true, date: state.date, title: x.title }); toast('완료로 표시했습니다'); state.view = 'list'; render(); } } }, isDone(x.video_id) ? '다시 저장하고 목록으로' : '완료하고 목록으로'),
+        a.practice ? el('button', { class: 'btn ghost', on: { click: () => { state[key] = !state[key]; render(); } } }, state[key] ? '예시 닫기' : '예시 보기') : null),
+      state[key] ? el('div', { class: 'answer' }, el('dl', {}, el('dt', {}, '예시 첫 문장'), el('dd', { class: 'quote' }, p.example_hook || '-'),
+        el('dt', {}, '예시 썸네일 문구'), el('dd', { class: 'quote' }, p.example_thumb_text || '-'))) : null);
+  }
+
+  function renderNotes() {
+    const all = Object.entries(notes()).filter(([, n]) => n.my_hook || n.my_thumb || n.obs_thumb || n.obs_hook)
+      .sort((a, b) => (b[1].updated || '').localeCompare(a[1].updated || ''));
+    const exportText = () => all.map(([vid, n]) => [`[${n.date || ''}] ${n.title || vid}`, `https://youtu.be/${vid}`,
+      n.obs_thumb && `썸네일 관찰: ${n.obs_thumb}`, n.obs_hook && `30초 관찰: ${n.obs_hook}`,
+      n.my_hook && `내 첫 문장: ${n.my_hook}`, n.my_thumb && `내 썸네일 문구: ${n.my_thumb}`].filter(Boolean).join('\n')).join('\n\n');
+    const cards = all.map(([vid, n]) => el('div', { class: 'note' }, el('h3', {}, n.title || vid),
+      n.my_hook ? el('p', {}, el('span', { class: 'k' }, '내 첫 문장'), n.my_hook) : null,
+      n.my_thumb ? el('p', {}, el('span', { class: 'k' }, '내 썸네일 문구'), n.my_thumb) : null,
+      n.obs_hook ? el('p', {}, el('span', { class: 'k' }, '30초 관찰'), n.obs_hook) : null,
+      n.obs_thumb ? el('p', {}, el('span', { class: 'k' }, '썸네일 관찰'), n.obs_thumb) : null,
+      el('span', { class: 'meta num' }, n.date || '')));
+    $app.replaceChildren(...header('훅 트레이너'),
+      all.length ? el('div', { class: 'row', style: 'margin:0 0 12px' }, el('button', { class: 'btn ghost', on: { click: async () => {
+        try { await navigator.clipboard.writeText(exportText()); toast('노트를 복사했습니다'); } catch { toast('복사하지 못했습니다'); } } } }, '노트 전체 복사')) : null,
+      ...(cards.length ? cards : [el('div', { class: 'empty' }, el('p', {}, '아직 쓴 연습이 없습니다.'), el('p', { class: 'hint' }, '영상 하나를 골라 3단계까지 적으면 여기에 모입니다. 노트는 이 휴대폰 브라우저에만 저장됩니다.'))]));
+  }
+
+  init();
+})();
+</script>
+</body>
+</html>
