@@ -1,6 +1,6 @@
 {
  "date": "2026-09-22",
- "generated_at": "2026-09-22T21:38+09:00",
+ "generated_at": "2026-09-23T00:39+09:00",
  "filters": {
   "min_duration_sec": 181,
   "max_subscribers": 400000,
@@ -24,7 +24,7 @@
    "same_channel": 2,
    "too_long": 0
   },
-  "gemini_calls": 10
+  "gemini_calls": 0
  },
  "videos": [
   {
