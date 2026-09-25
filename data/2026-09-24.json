@@ -1,0 +1,256 @@
+{
+ "date": "2026-09-24",
+ "generated_at": "2026-09-25T22:55+09:00",
+ "filters": {
+  "min_duration_sec": 181,
+  "max_subscribers": 400000,
+  "grades": [
+   "Good",
+   "Great"
+  ],
+  "exclude_music": true,
+  "one_per_channel": true,
+  "skip_seen_days": 7
+ },
+ "stats": {
+  "hot_total": 2153,
+  "dropped": {
+   "shorts": 238,
+   "grade": 9,
+   "music": 13,
+   "big_channel": 2,
+   "views": 0,
+   "seen": 20,
+   "same_channel": 0,
+   "too_long": 0
+  },
+  "gemini_calls": 1
+ },
+ "videos": [
+  {
+   "rank": 1,
+   "video_id": "EKh0JcTmyCA",
+   "title": "일본여행 필수 쇼핑코스 KALDI 🛒 신상 쇼핑리스트 | 말차, 성게알 볶음밥, 사천식 냉면 | 솔직 리뷰",
+   "channel_title": "찌옹 zziong",
+   "subscriber_count": 5890,
+   "view_count": 36358,
+   "like_count": 0,
+   "comment_count": 12,
+   "duration_seconds": 401,
+   "published_at": "2026-09-15T10:45:25Z",
+   "contribution_grade": "Good",
+   "performance_grade": "Great",
+   "hot_score": 249.1,
+   "thumb": "https://i.ytimg.com/vi/EKh0JcTmyCA/hqdefault.jpg",
+   "url": "https://www.youtube.com/watch?v=EKh0JcTmyCA",
+   "analysis": null
+  },
+  {
+   "rank": 2,
+   "video_id": "QPhGs4u9RE4",
+   "title": "260911 전설 무한의 계단 시참",
+   "channel_title": "전설",
+   "subscriber_count": 17900,
+   "view_count": 1178982,
+   "like_count": 3479,
+   "comment_count": 11,
+   "duration_seconds": 14565,
+   "published_at": "2026-09-11T14:57:51Z",
+   "contribution_grade": "Good",
+   "performance_grade": "Great",
+   "hot_score": 247.1,
+   "thumb": "https://i.ytimg.com/vi/QPhGs4u9RE4/hqdefault.jpg",
+   "url": "https://www.youtube.com/watch?v=QPhGs4u9RE4",
+   "analysis": null
+  },
+  {
+   "rank": 3,
+   "video_id": "nRzb96rSFvc",
+   "title": "국제대회 우승 프로게이머의 심각한 부정행위",
+   "channel_title": "수피",
+   "subscriber_count": 261000,
+   "view_count": 517938,
+   "like_count": 9844,
+   "comment_count": 16403,
+   "duration_seconds": 438,
+   "published_at": "2026-09-20T03:21:15Z",
+   "contribution_grade": "Good",
+   "performance_grade": "Good",
+   "hot_score": 238.4,
+   "thumb": "https://i.ytimg.com/vi/nRzb96rSFvc/hqdefault.jpg",
+   "url": "https://www.youtube.com/watch?v=nRzb96rSFvc",
+   "analysis": null
+  },
+  {
+   "rank": 4,
+   "video_id": "gOsksK31vTI",
+   "title": "일본여행 후기 -!",
+   "channel_title": "[YM상사]하윤잉",
+   "subscriber_count": 1290,
+   "view_count": 13872,
+   "like_count": 74,
+   "comment_count": 0,
+   "duration_seconds": 16079,
+   "published_at": "2026-09-15T13:54:07Z",
+   "contribution_grade": "Great",
+   "performance_grade": "Great",
+   "hot_score": 238.1,
+   "thumb": "https://i.ytimg.com/vi/gOsksK31vTI/hqdefault.jpg",
+   "url": "https://www.youtube.com/watch?v=gOsksK31vTI",
+   "analysis": null
+  },
+  {
+   "rank": 5,
+   "video_id": "Idwjdjrd2L8",
+   "title": "\"한국인 99%가 몰라서 돈 못벌고있어요\" 79세도 시작하자마자 바로 돈벌 수 있는 전 세계 1위 부업 쇼핑쇼츠로 돈버는법 전부 공개합니다(26년 최신판)",
+   "channel_title": "AI 레벨업클래스",
+   "subscriber_count": 12300,
+   "view_count": 51639,
+   "like_count": 0,
+   "comment_count": 68,
+   "duration_seconds": 1840,
+   "published_at": "2026-09-16T11:00:30Z",
+   "contribution_grade": "Great",
+   "performance_grade": "Good",
+   "hot_score": 236.5,
+   "thumb": "https://i.ytimg.com/vi/Idwjdjrd2L8/hqdefault.jpg",
+   "url": "https://www.youtube.com/watch?v=Idwjdjrd2L8",
+   "analysis": null
+  },
+  {
+   "rank": 6,
+   "video_id": "6VlRVsCGuhw",
+   "title": "누구나 쉽게하는 뱃살 쭉 빼는 10분 집에서 걷기 운동! 중년을 위한 한 달 10kg 챌린지",
+   "channel_title": "건강한 박코치",
+   "subscriber_count": 29500,
+   "view_count": 1505426,
+   "like_count": 24163,
+   "comment_count": 1322,
+   "duration_seconds": 1045,
+   "published_at": "2025-04-11T09:30:03Z",
+   "contribution_grade": "Great",
+   "performance_grade": "Great",
+   "hot_score": 236.0,
+   "thumb": "https://i.ytimg.com/vi/6VlRVsCGuhw/hqdefault.jpg",
+   "url": "https://www.youtube.com/watch?v=6VlRVsCGuhw",
+   "analysis": {
+    "thumbnail": {
+     "first_glance": "가장 먼저 시선이 가는 곳은 중앙 우측의 강사 모습과 좌측의 거대한 '10분 집에서 걷기 운동!' 텍스트입니다. 밝은 배경 대비 검은색 운동복을 입은 강사의 역동적인 동작과 파란색/흰색의 큰 글씨가 시각적 대비를 이룹니다.",
+     "text_on_thumbnail": "100만뷰 달성! 뱃살 쭉 빼는 10분 집에서 걷기 운동! 한 달 10kg 빼기!",
+     "emotion_trigger": "'이득'과 '신뢰'를 자극합니다. '집에서 10분 걷기만으로 한 달 10kg 감량'이라는 강력한 이득을 제시하고, '100만뷰 달성' 배지를 통해 검증된 효과라는 신뢰감을 줍니다.",
+     "composition": "우측에 제자리 걷기 동작을 하는 인물을 배치하여 역동성을 주고, 좌측에는 굵고 큰 서체의 텍스트를 배치해 균형을 맞췄습니다. 노란색 화살표와 금색 배지로 시선의 흐름을 유도합니다.",
+     "title_combo": "썸네일은 '10분 집에서 걷기', '한 달 10kg'라는 핵심 키워드와 시각적 자극에 집중하고, 제목은 '누구나 쉽게', '중년을 위한' 등의 타겟팅 키워드를 추가하여 상호 보완합니다."
+    },
+    "hook": {
+     "first_line": "뱃살 때문에 속상하세요.",
+     "hook_type": "공감형 + 결과먼저형",
+     "timeline": [
+      {
+       "range": "0-3초",
+       "what": "뱃살에 대한 고민을 질문으로 던진 후, '집에서 10분 걸으면 한 달 10kg 가능'이라는 파격적인 결과를 바로 제시합니다.",
+       "why": "시청자가 겪고 있는 가장 큰 통증을 건드린 뒤, 매우 쉽고 매력적인 해결책을 곧바로 제안하여 호기심을 유발합니다."
+      },
+      {
+       "range": "3-10초",
+       "what": "살이 빠지는 긍정적인 느낌을 상상하게 만들고, 지체 없이 '지금 바로 시작하겠다'며 행동을 촉구합니다.",
+       "why": "지루한 서론 없이 바로 본론(운동)으로 들어갈 것을 예고하여 초반 이탈을 방지합니다."
+      },
+      {
+       "range": "10-30초",
+       "what": "중년층의 현실적 고민(나잇살, 내장지방, 관절 부담, 외출의 어려움)을 언급하며, 이 운동이 왜 그들에게 최적의 해결책인지 설명합니다.",
+       "why": "시청자가 '이 영상은 나를 위한 것이 맞다'고 확신하게 만들며 시청 지속 이유를 강화합니다."
+      }
+     ],
+     "promise": "관절 무리 없이 집에서 하루 10분만 투자하면 나잇살과 뱃살을 빼고 한 달 10kg 감량에 성공할 수 있다는 약속",
+     "devices": [
+      "공감형 질문",
+      "구체적 숫자 제시 (10분, 10kg)",
+      "타겟 맞춤형 장점 (관절 부담 없음)"
+     ]
+    },
+    "transcript_30s": "뱃살 때문에 속상하세요. 집에서 딱 10분만 걸으면 한 달에 10kg도 가능합니다. 살 쭉 빠지는 기분. 저와 함께 느껴 보실 준비되셨나요? 자, 지금 바로 시작해 볼게요. 안녕하세요. 더브레이즘 TV 구독자 여러분. 박내치 대표입니다. 나이 들수록 뱃살이 쌓이고 내장 지방이 신경 쓰이죠. 밖에 나가기 힘들어도이 10분 걷기 운동이면 관절 부담 없이 살을 빼고 한 달에 10kg 감량을 같이 도전할 수 있어요. 자,",
+    "lesson": "타겟의 가장 아픈 통증(뱃살, 관절)을 찌르고, 가장 쉬운 해결책(10분 걷기)을 구체적 숫자와 함께 즉시 제시하라.",
+    "practice": {
+     "task": "40대 직장인을 타겟으로, 돈과 시간을 덜 낭비하는 노후 준비/재테크 팁을 제안하는 썸네일과 오프닝 구성하기.",
+     "example_hook": "통장 잔고 보면 한숨 나오시죠? 하루 5분만 바꾸면 노후 자금 1억 더 모읍니다.",
+     "example_thumb_text": "하루 5분! 돈 낭비 막는 노후 준비법"
+    },
+    "basis": "video",
+    "_model": "gemini-3.5-flash",
+    "_analyzed_at": "2026-09-25T13:47:43+00:00"
+   }
+  },
+  {
+   "rank": 7,
+   "video_id": "lgu4O2Xa9gY",
+   "title": "연차없이 프랑스 파리 1박 3일 여행 가능? I 곽범 I 연차없이 어떡행2 EP.5",
+   "channel_title": "때때때 TTT",
+   "subscriber_count": 314000,
+   "view_count": 764557,
+   "like_count": 7174,
+   "comment_count": 960,
+   "duration_seconds": 2841,
+   "published_at": "2026-09-17T10:00:00Z",
+   "contribution_grade": "Good",
+   "performance_grade": "Good",
+   "hot_score": 231.6,
+   "thumb": "https://i.ytimg.com/vi/lgu4O2Xa9gY/hqdefault.jpg",
+   "url": "https://www.youtube.com/watch?v=lgu4O2Xa9gY",
+   "analysis": null
+  },
+  {
+   "rank": 8,
+   "video_id": "Egwxr9Hvls4",
+   "title": "잠 잘 오는 빗소리 - 부드러운 빗소리와 5분후 어두운 화면으로",
+   "channel_title": "smilemedia",
+   "subscriber_count": 329000,
+   "view_count": 41050178,
+   "like_count": 131794,
+   "comment_count": 6015,
+   "duration_seconds": 36142,
+   "published_at": "2018-06-17T00:30:00Z",
+   "contribution_grade": "Great",
+   "performance_grade": "Great",
+   "hot_score": 231.3,
+   "thumb": "https://i.ytimg.com/vi/Egwxr9Hvls4/hqdefault.jpg",
+   "url": "https://www.youtube.com/watch?v=Egwxr9Hvls4",
+   "analysis": null
+  },
+  {
+   "rank": 9,
+   "video_id": "a1j2ngeNzZ4",
+   "title": "서울사이버대학교 광고(CM송) 10시간",
+   "channel_title": "hletrd",
+   "subscriber_count": 1920,
+   "view_count": 777189,
+   "like_count": 5345,
+   "comment_count": 1135,
+   "duration_seconds": 36001,
+   "published_at": "2015-10-30T00:42:46Z",
+   "contribution_grade": "Great",
+   "performance_grade": "Great",
+   "hot_score": 228.1,
+   "thumb": "https://i.ytimg.com/vi/a1j2ngeNzZ4/hqdefault.jpg",
+   "url": "https://www.youtube.com/watch?v=a1j2ngeNzZ4",
+   "analysis": null
+  },
+  {
+   "rank": 10,
+   "video_id": "GCbd8J_BDYc",
+   "title": "수녀님과 신부님의 노후 생활 생각보다 쉽지 않을 수 있다고? | 천주교상시 | 성직자노후 | 가톨릭이야기",
+   "channel_title": "신앙의 쉼터",
+   "subscriber_count": 5110,
+   "view_count": 71711,
+   "like_count": 1661,
+   "comment_count": 102,
+   "duration_seconds": 1199,
+   "published_at": "2026-09-20T00:00:08Z",
+   "contribution_grade": "Good",
+   "performance_grade": "Great",
+   "hot_score": 227.4,
+   "thumb": "https://i.ytimg.com/vi/GCbd8J_BDYc/hqdefault.jpg",
+   "url": "https://www.youtube.com/watch?v=GCbd8J_BDYc",
+   "analysis": null
+  }
+ ]
+}
